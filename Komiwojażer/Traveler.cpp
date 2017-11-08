@@ -173,31 +173,48 @@ void Traveler::FindMin2()
 }
 void Traveler::FindMaxMin()
 {
-	maxminW = help[1];
+	int i = 0;
+	maxminW = help[0];
 	for (k = 1; k < n; k++)
 	{
-		if (help[k] > maxminW)
+		if (help[i] > maxminW)
 		{
-			maxminW = help[k];
+			maxminW = help[i];
 			szuki = k;
 		}
+		i++;
 	}
-	maxminK = help2[1];
+	i = 0;
+	maxminK = help2[0];
 	for (k = 1; k < n; k++)
 	{
-		if (help2[k] > maxminK)
+		if (help2[i] > maxminK)
 		{
-			maxminK = help2[k];
+			maxminK = help2[i];
 			szukj = k;
 		}
+		i++;
 	}
 
-	cout << endl << "Najwieksze min z W: " << maxminW << szuki << endl;
-	cout << endl << "Najwieksze min z K: " << maxminK << szukj << endl;
+	cout << endl << "Najwieksze min z W: " << maxminW << endl;
+	cout << endl << "Najwieksze min z K: " << maxminK << endl;
+}
+
+void Traveler::FindZero()
+{
+
+	for (int j = 1; j<n; j++)
+		if (cities[szuki][j] == 0)
+		{
+			indj = j;
+		}
+
+	cout << endl << "wartosc zera: " << max << " dla indexow: i=" << szuki << " j=" << indj << endl;
 }
 
 void Traveler::FindInd()
 {
+
 	max = 0;
 	if (maxminK<maxminW)
 	{
@@ -212,7 +229,7 @@ void Traveler::FindInd()
 		for (int j = 1; j<n; j++)
 			if (cities[szuki][j] == max)
 			{
-				//indi = szuki;
+				indi = szuki;
 				indj = j;
 			}
 	}
@@ -223,10 +240,11 @@ void Traveler::FindInd()
 				if (cities[i][szukj] == max)
 				{
 					indi = i;
-				//	indj = szukj;
+					indj = szukj;
 				}
-		} 
+		}
 	cout << endl << "maks wartosc: " << max << " dla indexow: i=" << indi << " j=" << indj << endl;
+
 }
 
 void Traveler::DisplayMin()

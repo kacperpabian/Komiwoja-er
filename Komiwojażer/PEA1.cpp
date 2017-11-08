@@ -26,7 +26,7 @@ int main()
 	cout << endl << traveler.LB << endl;
 	traveler.FindMin2();
 	traveler.FindMaxMin();
-	traveler.FindInd();
+	traveler.FindZero();
 
 
 	getchar();

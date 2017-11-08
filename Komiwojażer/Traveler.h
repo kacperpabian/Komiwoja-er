@@ -23,6 +23,7 @@ public:
 	void FindMin2();
 	void FindMaxMin();
 	void FindInd();
+	void FindZero();
 	Traveler(int** cities, int n);
 	~Traveler();
 };
