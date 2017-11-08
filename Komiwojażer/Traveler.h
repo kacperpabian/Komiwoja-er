@@ -9,8 +9,9 @@ using namespace std;
 class Traveler
 {
 public: 
-	int i, j, n, min, k = 0, sum = 0, h = 0;
-	int max = 0, maxminW = 0, maxminK = 0, szuki = 0, szukj = 0;
+	int n, min, k = 0, sum = 0, h = 0;
+	int max = 0, maxminW = 0, maxminK = 0, szuki = 1, szukj = 1;
+	int indi = 0, indj = 0;
 	int** cities, *help, *help2;
 	int LB;
 
