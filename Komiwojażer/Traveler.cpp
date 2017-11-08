@@ -407,3 +407,14 @@ void Traveler::SumLowerBound()
 		LB += help2[i];
 	}
 }
+
+void Traveler::Reset() 
+{
+	max = 0;
+	maxminW = 0;
+	maxminK = 0;
+	szuki = 1;
+	szukj = 1;
+	indi = 0;
+	indj = 0;
+}

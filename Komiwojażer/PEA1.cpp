@@ -19,8 +19,9 @@ int main()
 	traveler.InitCities2();
 	traveler.RemoveRC();
 
-	for (int i = n - 1; i > 2; i--)
+	for (int i = n - 2; i > 2; i--)
 	{
+		traveler.Reset();
 		traveler.FindMin();
 		traveler.FindMin2();
 		traveler.FindMaxMin();

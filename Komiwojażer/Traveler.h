@@ -28,6 +28,7 @@ public:
 	void RemoveRC();
 	void BlockBack();
 	void InitCities2();
+	void Reset();
 	Traveler(int n);
 	~Traveler();
 };
