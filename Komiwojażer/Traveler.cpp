@@ -56,14 +56,23 @@ void Traveler::LoadCities()
 
 void Traveler::DisplayCities(int ** cities, int n)
 {
-	//  system("cls");
+	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 	cout << endl << " Macierz miast:";
 	for (int i = 0; i < n; i++)
 	{
 		cout << endl;
 		for (int j = 0; j < n; j++)
 		{
-			cout.width(5);  cout << cities[i][j];
+			if (cities[i][j] == 999)
+				SetConsoleTextAttribute(hConsole, 12);
+			else if (cities[i][j] == 0)
+				SetConsoleTextAttribute(hConsole, 2);
+			if (j == 0 || i == 0)
+				SetConsoleTextAttribute(hConsole, 8);
+
+			cout.width(5);
+			cout << cities[i][j];
+			SetConsoleTextAttribute(hConsole, 7);
 		}
 	}
 	cout << endl;
