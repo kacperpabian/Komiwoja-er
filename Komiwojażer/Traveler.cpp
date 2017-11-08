@@ -13,7 +13,7 @@ Traveler::Traveler(int n)
 
 Traveler::~Traveler()
 {
-	for (int i = 0; i < n; i++)
+	for (int i = 0; i < n2; i++)
 	{
 		//delete[] cities[i];
 		delete[] cities2[i];
@@ -40,7 +40,7 @@ void Traveler::LoadCities()
 		cities[0][j] = h;
 		h++;
 	}
-	for (i = 1; i < n; i++)
+	/*for (i = 1; i < n; i++)
 	{
 		for (j = 1; j < n; j++)
 		{
@@ -50,7 +50,35 @@ void Traveler::LoadCities()
 				cities[i][j] = rand() % 20;
 			}
 		}
-	}
+	}*/
+
+	cities[1][1] = 999;
+	cities[2][1] = 78;
+	cities[3][1] = 5;
+	cities[4][1] = 12;
+	cities[5][1] = 3;
+	cities[1][2] = 12;
+	cities[2][2] = 999;
+	cities[3][2] = 56;
+	cities[4][2] = 6;
+	cities[5][2] = 98;
+	cities[1][3] = 3;
+	cities[2][3] = 90;
+	cities[3][3] = 999;
+	cities[4][3] = 8;
+	cities[5][3] = 3;
+	cities[1][4] = 45;
+	cities[2][4] = 21;
+	cities[3][4] = 23;
+	cities[4][4] = 999;
+	cities[5][4] = 2;
+	cities[1][5] = 6;
+	cities[2][5] = 3;
+	cities[3][5] = 98;
+	cities[4][5] = 34;
+	cities[5][5] = 999;
+
+
 	DisplayCities(cities, n);
 }
 
@@ -293,11 +321,13 @@ void Traveler::RemoveRC()
 {
 	if (maxminK > maxminW)
 	{
+		cout << " k " << indi << "/" << szukj << endl;
 		cities[szukj][indi] = 999;
 		cities2[szukj][indi] = 999;
 	}
 	else
 	{
+		cout << " w " << szuki << "/" << indj << endl;
 		cities[indj][szuki] = 999;	
 		cities2[indj][szuki] = 999;
 	}
@@ -417,4 +447,9 @@ void Traveler::Reset()
 	szukj = 1;
 	indi = 0;
 	indj = 0;
+}
+
+void Traveler::End()
+{
+	DisplayCities(cities2, n2);
 }

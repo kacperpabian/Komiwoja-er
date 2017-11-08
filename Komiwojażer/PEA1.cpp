@@ -28,6 +28,6 @@ int main()
 		traveler.FindZero();
 		traveler.RemoveRC();
 	}
-
+	traveler.End();
 	getchar();
 }

@@ -29,6 +29,7 @@ public:
 	void BlockBack();
 	void InitCities2();
 	void Reset();
+	void End();
 	Traveler(int n);
 	~Traveler();
 };
