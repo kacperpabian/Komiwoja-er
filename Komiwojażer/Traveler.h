@@ -8,12 +8,12 @@ using namespace std;
 
 class Traveler
 {
-public: 
+public:
 	int n, n2, min, k = 0, sum = 0, h = 0;
 	int max = 0, maxminW = 0, maxminK = 0,
 		szuki = 1, szukj = 1;
 	int indi = 0, indj = 0;
-	int **cities, **cities2, *help, *help2;
+	int **cities, **cities2, **cities3, *help, *help2;
 	int LB;
 
 	void LoadCities();
