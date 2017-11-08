@@ -264,7 +264,7 @@ void Traveler::FindInd()
 	cout << endl << "maks wartosc: " << max << " dla indexow: i=" << indi << " j=" << indj << endl;
 }
 
-void Traveler::RemoveRC()
+void Traveler::InitCities2()
 {
 	cities2 = new int*[n];
 	for (int i = 0; i < n; i++)
@@ -279,6 +279,20 @@ void Traveler::RemoveRC()
 			cities2[i][j] = cities[i][j];
 		}
 	}
+}
+void Traveler::RemoveRC()
+{
+	if (maxminK > maxminW)
+	{
+		cities[szukj][indi] = 999;
+		cities2[szukj][indi] = 999;
+	}
+	else
+	{
+		cities[indj][szuki] = 999;	
+		cities2[indj][szuki] = 999;
+	}
+	
 
 	n2 = n2 - 1;
 	cities3 = new int*[n2];
@@ -305,14 +319,14 @@ void Traveler::RemoveRC()
 	int o = 1;
 	if (maxminK > maxminW)
 	{
-		for (int i = 1; i < n - 1; i++)
+		for (int i = 1; i < n2; i++)
 		{
 			if (i == indi)
 				p++;
 
 			o = 1;
 
-			for (int j = 1; j < n - 1; j++)
+			for (int j = 1; j < n2; j++)
 			{
 				if (j == szukj)
 					o++;
@@ -325,14 +339,14 @@ void Traveler::RemoveRC()
 	}
 	else
 	{
-		for (int i = 1; i < n - 1; i++)
+		for (int i = 1; i < n2; i++)
 		{
 			if (i == szuki)
 				p++;
 
 			o = 1;
 
-			for (int j = 1; j < n - 1; j++)
+			for (int j = 1; j < n2; j++)
 			{
 				if (j == indj)
 					o++;
@@ -343,7 +357,6 @@ void Traveler::RemoveRC()
 			p++;
 		}
 	}
-	
 	for (int i = 0; i < n; i++)
 	{
 		delete[] cities[i];
@@ -352,6 +365,13 @@ void Traveler::RemoveRC()
 
 	cities = cities3;
 	DisplayCities(cities, n2);
+	DisplayCities(cities2, n);
+	//BlockBack();
+}
+
+void Traveler::BlockBack()
+{
+	cities3[indj][szuki] = 999;
 }
 
 void Traveler::DisplayMin()

@@ -26,6 +26,8 @@ public:
 	void FindInd();
 	void FindZero();
 	void RemoveRC();
+	void BlockBack();
+	void InitCities2();
 	Traveler(int n);
 	~Traveler();
 };

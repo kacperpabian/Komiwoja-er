@@ -19,6 +19,7 @@ int main()
 	traveler.FindMin2();
 	traveler.FindMaxMin();
 	traveler.FindZero();
+	traveler.InitCities2();
 	traveler.RemoveRC();
 
 	getchar();
