@@ -5,19 +5,24 @@ Traveler::~Traveler()
 	for (int i = 0; i < n; i++)
 	{
 		delete[] cities[i];
+		delete[] cities2[i];
 	}
 	delete[] cities;
+	delete[] cities2;
 	delete[] help;
 	delete[] help2;
 }
-Traveler::Traveler(int **cities, int n)
+Traveler::Traveler(int n)
 {
-	this->cities = cities;
 	this->n = n;
-
+	cities = new int*[n];
+	for (int i = 0; i < n; i++)
+	{
+		cities[i] = new int[n];
+	}
 }
 
-int** Traveler::LoadCities()
+void Traveler::LoadCities()
 {
 	int m = 0;
 	int j = 0, i=0;
@@ -44,10 +49,10 @@ int** Traveler::LoadCities()
 			}
 		}
 	}
-	return cities;
+	DisplayCities(cities, n);
 }
 
-void Traveler::DisplayCities()
+void Traveler::DisplayCities(int ** cities , int n)
 {
 //	system("cls");
 	cout << endl << "Macierz miast:";
@@ -113,6 +118,7 @@ void Traveler::FindMin()
 	}
 
 	DisplayMin();
+	DisplayCities(cities, n);
 }
 
 void Traveler::FindMin2()
@@ -168,7 +174,6 @@ void Traveler::FindMin2()
 			zeroNumber = 0;
 		}
 		DisplayMin();
-
 	}
 }
 void Traveler::FindMaxMin()
@@ -244,7 +249,49 @@ void Traveler::FindInd()
 				}
 		}
 	cout << endl << "maks wartosc: " << max << " dla indexow: i=" << indi << " j=" << indj << endl;
+}
 
+void Traveler::RemoveRC()
+{
+	n2 = n -1;
+	cities2 = new int*[n2];
+	for (int i = 0; i < n2; i++)
+	{
+		cities2[i] = new int[n2];
+	}
+
+	h = 0;
+	for (int i = 0; i < n2; i++)
+	{
+		cities2[i][0] = h;
+		h++;
+	}
+
+	h = 0;
+	for (int j = 0; j < n2; j++)
+	{
+		cities2[0][j] = h;
+		h++;
+	}
+
+	int p = 1;
+	int o = 1;
+	for (int i = 1; i < n; i++)
+	{
+		if (i == indi)
+			i++;
+		
+		for (int j = 1; j < n; j++)
+		{
+			if (j == indj)
+				j++;
+			
+			cities2[p][o] = cities[i][j];
+			o++;
+		}
+		p++;
+	}
+	DisplayCities(cities2, n2);
 }
 
 void Traveler::DisplayMin()

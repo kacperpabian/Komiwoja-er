@@ -9,14 +9,15 @@ using namespace std;
 class Traveler
 {
 public: 
-	int n, min, k = 0, sum = 0, h = 0;
-	int max = 0, maxminW = 0, maxminK = 0, szuki = 1, szukj = 1;
+	int n, n2, min, k = 0, sum = 0, h = 0;
+	int max = 0, maxminW = 0, maxminK = 0,
+		szuki = 1, szukj = 1;
 	int indi = 0, indj = 0;
-	int** cities, *help, *help2;
+	int **cities, **cities2, *help, *help2;
 	int LB;
 
-	int** LoadCities();
-	void DisplayCities();
+	void LoadCities();
+	void DisplayCities(int** cities, int n);
 	void FindMin();
 	void DisplayMin();
 	void SumLowerBound();
@@ -24,6 +25,7 @@ public:
 	void FindMaxMin();
 	void FindInd();
 	void FindZero();
-	Traveler(int** cities, int n);
+	void RemoveRC();
+	Traveler(int n);
 	~Traveler();
 };
