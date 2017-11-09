@@ -438,6 +438,12 @@ void Traveler::RemoveRC()
 
 void Traveler::DisplayPath()
 {
+	int start = path[1];
+	int *pathSort = new int[counter];
+
+
+
+
 	cout << endl << " Wyswietlam sciezke: " << endl;
 	for (int i = 0; i < counter; i++)
 	{
@@ -462,6 +468,11 @@ void Traveler::DisplayMin()
 		cout.width(3);  cout << help2[h];
 	}
 	cout << endl;
+}
+
+void Traveler::FindLastPath()
+{
+
 }
 
 void Traveler::SumLowerBound()

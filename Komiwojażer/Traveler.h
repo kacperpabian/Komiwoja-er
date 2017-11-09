@@ -31,6 +31,7 @@ public:
 	void Reset();
 	void End();
 	void DisplayPath();
+	void FindLastPath();
 	Traveler(int n);
 	~Traveler();
 };
