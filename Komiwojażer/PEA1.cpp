@@ -3,7 +3,7 @@
 
 int main()
 {
-	//srand(time(NULL));
+	srand(time(NULL));
 	int n;
 	system("cls");
 
@@ -33,6 +33,7 @@ int main()
 	}
 	traveler.End();
 	traveler.FindLastPath();
+	traveler.SortPath();
 	traveler.DisplayPath();
 	getchar();
 }

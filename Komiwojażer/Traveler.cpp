@@ -4,6 +4,7 @@ Traveler::Traveler(int n)
 {
 	this->n = n;
 	n2 = n;
+	finalPath = new int[2*n2];
 	path = new int[2 * n2];
 	counter = 0;
 	cities = new int*[n];
@@ -28,6 +29,7 @@ Traveler::~Traveler()
 	delete[] help;
 	delete[] help2;
 	delete[] path;
+	delete[] finalPath;
 }
 
 void Traveler::LoadCities()
@@ -54,7 +56,7 @@ void Traveler::LoadCities()
 			if (i == j)cities[i][j] = 999;
 			else
 			{
-				cities[i][j] = rand() % 20;
+				cities[i][j] = rand() % 40;
 			}
 		}
 	}
@@ -466,7 +468,6 @@ void Traveler::DisplayMin()
 
 void Traveler::SortPath()
 {
-	finalPath = new int[counter - 1];
 	int it = 2;
 	finalPath[0] = path[0];
 	finalPath[1] = path[1];
@@ -474,7 +475,7 @@ void Traveler::SortPath()
 	path[1] = 0;
 
 	int buffor = finalPath[1];
-	for(int j = 0; j < counter; j++)
+	for(int j = 0; j < counter/2; j++)
 	{
 		for (int i = 0; i < counter; i++)
 		{
@@ -493,6 +494,22 @@ void Traveler::SortPath()
 void Traveler::FindLastPath()
 {
 
+
+
+	/*if (cities[1][1] == 999 || cities[2][2] == 999)
+	{
+		path[counter++] = cities[2][0];
+		path[counter++] = cities[0][1];
+		path[counter++] = cities[1][0];
+		path[counter++] = cities[0][2];
+	}
+	else
+	{
+		path[counter++] = cities[1][0];
+		path[counter++] = cities[0][1];
+		path[counter++] = cities[2][0];
+		path[counter++] = cities[0][2];
+	}*/
 }
 
 void Traveler::SumLowerBound()
