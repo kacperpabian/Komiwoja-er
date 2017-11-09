@@ -4,6 +4,8 @@ Traveler::Traveler(int n)
 {
 	this->n = n;
 	n2 = n;
+	path = new int[2 * n2];
+	counter = 0;
 	cities = new int*[n];
 	for (int i = 0; i < n; i++)
 	{
@@ -15,13 +17,17 @@ Traveler::~Traveler()
 {
 	for (int i = 0; i < n2; i++)
 	{
-		//delete[] cities[i];
 		delete[] cities2[i];
+	}
+	for (int i = 0; i < n; i++)
+	{
+		delete[] cities[i];
 	}
 	delete[] cities;
 	delete[] cities2;
 	delete[] help;
 	delete[] help2;
+	delete[] path;
 }
 
 void Traveler::LoadCities()
@@ -52,31 +58,31 @@ void Traveler::LoadCities()
 			}
 		}
 	}
-	/*cities[1][1] = 999;
-	cities[2][1] = 78;
-	cities[3][1] = 5;
-	cities[4][1] = 12;
-	cities[5][1] = 3;
-	cities[1][2] = 12;
-	cities[2][2] = 999;
-	cities[3][2] = 56;
-	cities[4][2] = 6;
-	cities[5][2] = 98;
-	cities[1][3] = 3;
-	cities[2][3] = 90;
-	cities[3][3] = 999;
-	cities[4][3] = 8;
-	cities[5][3] = 3;
-	cities[1][4] = 45;
-	cities[2][4] = 21;
-	cities[3][4] = 23;
-	cities[4][4] = 999;
-	cities[5][4] = 2;
-	cities[1][5] = 6;
-	cities[2][5] = 3;
-	cities[3][5] = 98;
-	cities[4][5] = 34;
-	cities[5][5] = 999;*/
+	//cities[1][1] = 999;
+	//cities[2][1] = 78;
+	//cities[3][1] = 5;
+	//cities[4][1] = 12;
+	//cities[5][1] = 3;
+	//cities[1][2] = 12;
+	//cities[2][2] = 999;
+	//cities[3][2] = 56;
+	//cities[4][2] = 6;
+	//cities[5][2] = 98;
+	//cities[1][3] = 3;
+	//cities[2][3] = 90;
+	//cities[3][3] = 999;
+	//cities[4][3] = 8;
+	//cities[5][3] = 3;
+	//cities[1][4] = 45;
+	//cities[2][4] = 21;
+	//cities[3][4] = 23;
+	//cities[4][4] = 999;
+	//cities[5][4] = 2;
+	//cities[1][5] = 6;
+	//cities[2][5] = 3;
+	//cities[3][5] = 98;
+	//cities[4][5] = 34;
+	//cities[5][5] = 999;
 
 	DisplayCities(cities, n);
 }
@@ -331,6 +337,9 @@ void Traveler::RemoveRC()
 	if (maxminK > maxminW)
 	{
 		cout << " k " << cities[indi][0] << "/" << cities[0][szukj] << endl;
+		path[counter++] = cities[indi][0];
+		path[counter++] = cities[0][szukj];
+
 		
 		for (int i = 0; i < n; i++)
 		{
@@ -349,6 +358,8 @@ void Traveler::RemoveRC()
 	else
 	{
 		cout << " w " << cities[szuki][0] << "/" << cities[0][indj] << endl;
+		path[counter++] = cities[szuki][0];
+		path[counter++] = cities[0][indj];
 		for (int i = 0; i < n; i++)
 		{
 			for (int j = 0; j < n; j++)
@@ -425,9 +436,14 @@ void Traveler::RemoveRC()
 	//DisplayCities(cities2, n2);
 }
 
-void Traveler::BlockBack()
+void Traveler::DisplayPath()
 {
-	cities3[indj][szuki] = 999;
+	cout << endl << " Wyswietlam sciezke: " << endl;
+	for (int i = 0; i < counter; i++)
+	{
+		cout << " (" << path[i++] << " " << path[i] << ") ";
+	}
+	cout << endl;
 }
 
 void Traveler::DisplayMin()

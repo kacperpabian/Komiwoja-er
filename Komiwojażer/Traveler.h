@@ -15,6 +15,7 @@ public:
 	int indi = 0, indj = 0;
 	int **cities, **cities2, **cities3, *help, *help2;
 	int LB;
+	int *path, counter;
 
 	void LoadCities();
 	void DisplayCities(int** cities, int n);
@@ -26,10 +27,10 @@ public:
 	void FindInd();
 	void FindZero();
 	void RemoveRC();
-	void BlockBack();
 	void InitCities2();
 	void Reset();
 	void End();
+	void DisplayPath();
 	Traveler(int n);
 	~Traveler();
 };
