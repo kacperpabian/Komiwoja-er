@@ -32,6 +32,6 @@ int main()
 		traveler.RemoveRC();
 	}
 	traveler.End();
-	traveler.DisplayPath();
+	traveler.FindLastPath();
 	getchar();
 }
