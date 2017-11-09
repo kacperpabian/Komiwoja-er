@@ -1,7 +1,9 @@
 #include "Traveler.h"
+#include <ctime>
 
 int main()
 {
+	//srand(time(NULL));
 	int n;
 	system("cls");
 
