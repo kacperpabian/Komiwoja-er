@@ -4,7 +4,8 @@ Traveler::Traveler(int n)
 {
 	this->n = n;
 	n2 = n;
-	finalPath = new int[2*n2];
+	reservePath = new int[2 * n2];
+	finalPath = new int[2 * n2];
 	path = new int[2 * n2];
 	counter = 0;
 	cities = new int*[n];
@@ -30,6 +31,7 @@ Traveler::~Traveler()
 	delete[] help2;
 	delete[] path;
 	delete[] finalPath;
+	delete[] reservePath;
 }
 
 void Traveler::LoadCities()
@@ -438,12 +440,12 @@ void Traveler::RemoveRC()
 	//DisplayCities(cities2, n2);
 }
 
-void Traveler::DisplayPath()
+void Traveler::DisplayPath(int* path)
 {
 	cout << endl << " Wyswietlam sciezke: " << endl;
 	for (int i = 0; i < counter; i++)
 	{
-		cout << " (" << finalPath[i++] << " " << finalPath[i] << ") ";
+		cout << " (" << path[i++] << " " << path[i] << ") ";
 	}
 	cout << endl;
 }
@@ -466,7 +468,7 @@ void Traveler::DisplayMin()
 	cout << endl;
 }
 
-void Traveler::SortPath()
+void Traveler::SortPath(int* path)
 {
 	int it = 2;
 	finalPath[0] = path[0];
@@ -475,7 +477,7 @@ void Traveler::SortPath()
 	path[1] = 0;
 
 	int buffor = finalPath[1];
-	for(int j = 0; j < counter/2; j++)
+	for(int j = 0; j < counter / 2; j++)
 	{
 		for (int i = 0; i < counter; i++)
 		{
@@ -493,23 +495,31 @@ void Traveler::SortPath()
 
 void Traveler::FindLastPath()
 {
-
-
-
-	/*if (cities[1][1] == 999 || cities[2][2] == 999)
+	for (int i = 0; i < counter; i++)
 	{
-		path[counter++] = cities[2][0];
-		path[counter++] = cities[0][1];
-		path[counter++] = cities[1][0];
-		path[counter++] = cities[0][2];
+		reservePath[i] = path[i];
 	}
-	else
+	path[counter++] = cities[2][0];
+	path[counter++] = cities[0][1];
+	path[counter++] = cities[1][0];
+	path[counter++] = cities[0][2];
+	counter -= 4;
+	reservePath[counter++] = cities[1][0];
+	reservePath[counter++] = cities[0][1];
+	reservePath[counter++] = cities[2][0];
+	reservePath[counter++] = cities[0][2];
+
+	DisplayPath(path);
+	DisplayPath(reservePath);
+
+	SortPath(path);
+	//if (finalPath[0] == finalPath[counter - 1])
+		DisplayPath(finalPath);
+	//else 
 	{
-		path[counter++] = cities[1][0];
-		path[counter++] = cities[0][1];
-		path[counter++] = cities[2][0];
-		path[counter++] = cities[0][2];
-	}*/
+		SortPath(reservePath);
+		DisplayPath(finalPath);
+	}
 }
 
 void Traveler::SumLowerBound()
