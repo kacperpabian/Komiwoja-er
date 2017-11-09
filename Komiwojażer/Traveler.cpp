@@ -438,7 +438,12 @@ void Traveler::RemoveRC()
 
 void Traveler::DisplayPath()
 {
-	
+	cout << endl << " Wyswietlam sciezke: " << endl;
+	for (int i = 0; i < counter; i++)
+	{
+		cout << " (" << finalPath[i++] << " " << finalPath[i] << ") ";
+	}
+	cout << endl;
 }
 
 void Traveler::DisplayMin()
@@ -459,9 +464,9 @@ void Traveler::DisplayMin()
 	cout << endl;
 }
 
-void Traveler::FindLastPath()
+void Traveler::SortPath()
 {
-	int *finalPath = new int[counter - 1];
+	finalPath = new int[counter - 1];
 	int it = 2;
 	finalPath[0] = path[0];
 	finalPath[1] = path[1];
@@ -483,12 +488,11 @@ void Traveler::FindLastPath()
 			}
 		}
 	}
-	cout << endl << " Wyswietlam sciezke: " << endl;
-	for (int i = 0; i < counter; i++)
-	{
-		cout << " (" << finalPath[i++] << " " << finalPath[i] << ") ";
-	}
-	cout << endl;
+}
+
+void Traveler::FindLastPath()
+{
+
 }
 
 void Traveler::SumLowerBound()

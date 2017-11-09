@@ -33,5 +33,6 @@ int main()
 	}
 	traveler.End();
 	traveler.FindLastPath();
+	traveler.DisplayPath();
 	getchar();
 }
