@@ -476,9 +476,9 @@ void Traveler::FindLastPath()
 			if (buffor == path[i])
 			{
 				finalPath[it++] = path[i];
-				path[i++] == 0;
+				path[i++] = 0;
 				buffor = finalPath[it++] = path[i];
-				path[i++] == 0;
+				path[i++] = 0;
 				i = counter;
 			}
 		}
