@@ -23,6 +23,7 @@ int main()
 
 	for (int i = n - 2; i > 2; i--)
 	{
+		cout << "kek" << i << endl;
 		traveler.Reset();
 		traveler.FindMin();
 		traveler.FindMin2();

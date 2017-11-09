@@ -26,7 +26,7 @@ Traveler::~Traveler()
 
 void Traveler::LoadCities()
 {
-
+	cout << "LoadCities()" << endl;
 	int m = 0;
 	int j = 0, i = 0;
 	for (i = 0; i < n; i++)
@@ -76,13 +76,14 @@ void Traveler::LoadCities()
 	cities[2][5] = 3;
 	cities[3][5] = 98;
 	cities[4][5] = 34;
-	cities[5][5] = 999;
-*/
+	cities[5][5] = 999;*/
+
 	DisplayCities(cities, n);
 }
 
 void Traveler::DisplayCities(int ** cities, int n)
 {
+	cout << "DisplayCities()" << endl;
 	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 	cout << endl << " Macierz miast:";
 	for (int i = 0; i < n; i++)
@@ -107,6 +108,7 @@ void Traveler::DisplayCities(int ** cities, int n)
 
 void Traveler::FindMin()
 {
+	cout << "FindMin()" << endl;
 	int loop = n - 2, i = 0, j = 0;
 	help = new int[n];
 	help2 = new int[n];
@@ -164,8 +166,9 @@ void Traveler::FindMin()
 
 void Traveler::FindMin2()
 {
+	cout << "FindMin2()" << endl;
 	int i, j;
-	if (n > 3)
+	if (n > 2)
 	{
 		int zeroNumber = 0;
 		if (help && help2)
@@ -219,6 +222,7 @@ void Traveler::FindMin2()
 }
 void Traveler::FindMaxMin()
 {
+	cout << "FindMaxMin()" << endl;
 	int i = 0;
 	maxminW = help[0];
 	for (k = 1; k < n; k++)
@@ -248,6 +252,7 @@ void Traveler::FindMaxMin()
 
 void Traveler::FindZero()
 {
+	cout << "FindZero()" << endl;
 	if (maxminK > maxminW)
 	{
 		for (int i = 1; i < n; i++)
@@ -271,6 +276,7 @@ void Traveler::FindZero()
 
 void Traveler::FindInd()
 {
+	cout << "FindInd()" << endl;
 	max = 0;
 	if (maxminK < maxminW)
 	{
@@ -304,6 +310,7 @@ void Traveler::FindInd()
 
 void Traveler::InitCities2()
 {
+	cout << "InitCities2()" << endl;
 	cities2 = new int*[n];
 	for (int i = 0; i < n; i++)
 	{
@@ -320,6 +327,7 @@ void Traveler::InitCities2()
 }
 void Traveler::RemoveRC()
 {
+	cout << "RemoveRC()" << endl;
 	if (maxminK > maxminW)
 	{
 		cout << " k " << cities[indi][0] << "/" << cities[0][szukj] << endl;
@@ -330,8 +338,7 @@ void Traveler::RemoveRC()
 			{
 				if (cities[0][szukj] == cities[i][0] && cities[indi][0] == cities[0][j])
 				{
-					cities[j][i] = 999;
-					cout << "yay";
+					cities[i][j] = 999;
 				}
 			}
 		}
@@ -349,7 +356,6 @@ void Traveler::RemoveRC()
 				if (cities[0][indj] == cities[i][0] && cities[szuki][0] == cities[0][j])
 				{
 					cities[i][j] = 999;
-					cout << "na";
 				}
 			}
 		}
@@ -426,6 +432,7 @@ void Traveler::BlockBack()
 
 void Traveler::DisplayMin()
 {
+	cout << "DisplayMin()" << endl;
 	cout << endl << endl;
 	cout << " Najmniejsze elementy z wierszy:";
 	for (h = 0; h < n - 1; h++)
@@ -452,6 +459,7 @@ void Traveler::SumLowerBound()
 
 void Traveler::Reset() 
 {
+	cout << "Reset()" << endl;
 	max = 0;
 	maxminW = 0;
 	maxminK = 0;
@@ -463,5 +471,6 @@ void Traveler::Reset()
 
 void Traveler::End()
 {
+	cout << "End()" << endl;
 	DisplayCities(cities2, n2);
 }
