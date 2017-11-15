@@ -13,13 +13,13 @@ int main()
 	Traveler *traveler = new Traveler (++n);
 
 	traveler->LoadFromFile();
-	////traveler->LoadCities();
-	//traveler->InitCities2();
-	//traveler->Run();
+	//traveler->LoadCities();
+	traveler->InitCities2();
+	traveler->Run();
 
-	//traveler->End();
-	////traveler.DisplayPath();
-	//delete traveler;
+	traveler->End();
+	//traveler.DisplayPath();
+	delete traveler;
 	getchar();
 	getchar();
 }

@@ -468,7 +468,7 @@ void Traveler::FindZero()
 				
 			}
 	}
-	else
+	else if (maxminW == maxminK)
 	{
 		for (int i = 1; i < n; i++)
 			if (cities[i][szukj] == 0)
