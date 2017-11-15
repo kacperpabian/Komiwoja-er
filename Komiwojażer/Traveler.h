@@ -3,6 +3,9 @@
 #include <conio.h>
 #include <Windows.h>
 #include <cstdlib>
+#include <fstream>
+#include <string>
+#include <iomanip>
 
 using namespace std;
 
@@ -42,6 +45,7 @@ public:
 	void Run();
 	void RecursiveRun();
 	void RecursiveRunZero();
+	void LoadFromFile();
 	Traveler(int n);
 	Traveler(int n, int n2, int maxminW, int maxminK, int szuki, int szukj, int indi, int indj, int counter, int ** cities, int ** cities2, int * help, int * help2, int * path, int LB);
 	~Traveler();

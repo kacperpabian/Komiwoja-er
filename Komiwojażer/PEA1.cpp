@@ -12,13 +12,14 @@ int main()
 	cin >> n;
 	Traveler *traveler = new Traveler (++n);
 
-	traveler->LoadCities();
-	traveler->InitCities2();
-	traveler->Run();
+	traveler->LoadFromFile();
+	////traveler->LoadCities();
+	//traveler->InitCities2();
+	//traveler->Run();
 
-	traveler->End();
-	//traveler.DisplayPath();
-	delete traveler;
+	//traveler->End();
+	////traveler.DisplayPath();
+	//delete traveler;
 	getchar();
 	getchar();
 }

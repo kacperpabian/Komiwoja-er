@@ -14,9 +14,6 @@ Traveler::Traveler(int n)
 	finalPath = new int[2 * n2];
 	
 	counter = 0;
-	cities = new int*[n];
-	for (int i = 0; i < n; i++)
-		cities[i] = new int[n];
 
 	path = new int[2 * n2];
 	for (int i = 0; i < 2*n2; i++)
@@ -85,8 +82,84 @@ Traveler::~Traveler()
 	delete[] reservePath;
 }
 
+void Traveler::LoadFromFile()
+{
+	string name;
+
+	//cout << " Podaj nazewe pliku do wczytania zawartosci: " << endl;
+	//cin >> name;
+	name = "gr17.tsp";
+	//name = name + ".txt";
+
+	ifstream file(name);
+
+	if (!file)
+	{
+		cout << "Nie mozna otworzyc pliku" << endl;
+		return;
+	}
+	else
+	{
+		int counter = 0;
+		string tmp;
+
+		while (tmp != "EOF")
+		{
+			file >> tmp;
+			if(tmp == "0") counter++;
+		}
+		cout << endl << " counter: " << counter << endl;
+
+		n = counter+1;
+		cities = new int*[n];
+		for (int i = 0; i < n; i++)
+			cities[i] = new int[n];
+
+		int m = 2, h = 0;
+
+		for (int i = 0; i < n; i++)
+		{
+			cities[i][0] = h;
+			h++;
+		}
+		h = 0;
+		for (int j = 0; j < n; j++)
+		{
+			cities[0][j] = h;
+			h++;
+		}
+		int tmp2;
+		file.seekg(0, ios_base::beg);
+		for (int i = 1; i < n; i++)
+		{
+			for (int j = 1; j < m; j++)
+			{
+				file >> tmp2;
+				if (tmp2 == 0)
+				{
+					cities[i][j] = 999;
+					cities[j][i] = 999;
+				}
+				else
+				{
+					cities[i][j] = tmp2;
+					cities[j][i] = tmp2;
+				}
+			}
+			m++;
+		}
+	}
+	DisplayCities(cities, n);
+}
+
 void Traveler::LoadCities()
 {
+
+	cities = new int*[n];
+	for (int i = 0; i < n; i++)
+		cities[i] = new int[n];
+
+
 	int m = 0, j = 0, i = 0, h = 0;
 
 	for (i = 0; i < n; i++)
