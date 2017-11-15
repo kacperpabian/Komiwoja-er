@@ -1,6 +1,5 @@
 #pragma once
 #include <iostream>
-#include <conio.h>
 #include <Windows.h>
 #include <cstdlib>
 #include <fstream>
@@ -24,7 +23,7 @@ public:
 
 	int **cities, **cities2, **cities3, *help, *help2;
 	int LB;
-	int *path, counter, *finalPath, *reservePath;
+	int *path, counter, *fPath, *reservePath;
 
 	void LoadCities();
 	void DisplayCities(int** cities, int n);
@@ -47,6 +46,6 @@ public:
 	void RecursiveRunZero();
 	void LoadFromFile();
 	Traveler(int n);
-	Traveler(int n, int n2, int maxminW, int maxminK, int szuki, int szukj, int indi, int indj, int counter, int ** cities, int ** cities2, int * help, int * help2, int * path, int LB);
+	Traveler(int n, int n2, int maxminW, int maxminK, int szuki, int szukj, int indi, int indj, int counter, int ** cities, int * help, int * help2, int * path, int LB);
 	~Traveler();
 };

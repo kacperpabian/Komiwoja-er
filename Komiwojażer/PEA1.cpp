@@ -12,9 +12,9 @@ int main()
 	cin >> n;
 	Traveler *traveler = new Traveler (++n);
 
-	traveler->LoadFromFile();
-	//traveler->LoadCities();
-	traveler->InitCities2();
+	//traveler->LoadFromFile();
+	traveler->LoadCities();
+	//traveler->InitCities2();
 	traveler->Run();
 
 	traveler->End();

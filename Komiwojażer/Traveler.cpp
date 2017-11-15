@@ -11,17 +11,22 @@ Traveler::Traveler(int n)
 	this->n = n;
 	n2 = n;
 	reservePath = new int[2 * n2];
-	finalPath = new int[2 * n2];
+	fPath = new int[2 * n2];
 	
 	counter = 0;
 
 	path = new int[2 * n2];
-	for (int i = 0; i < 2*n2; i++)
+	for (int i = 0; i < 2 * n2; i++)
+	{
 		path[i] = 0;
+		fPath[i] = 0;
+		reservePath[i] = 0;
+	}
+		
 }
 
 Traveler::Traveler(int n, int n2, int maxminW, int maxminK, int szuki, int szukj, int indi, int indj, int counter,
-	int **cities, int **cities2, int *help, int *help2, int * path, int LB)
+	int **cities, int *help, int *help2, int * path, int LB)
 {
 	this->maxminW = maxminW;
 	this->maxminK = maxminK;
@@ -32,8 +37,8 @@ Traveler::Traveler(int n, int n2, int maxminW, int maxminK, int szuki, int szukj
 	this->n = n;
 	this->n2 = n2;
 	this->LB = LB;
-	reservePath = new int[2 * n2];
-	finalPath = new int[2 * n2];
+	this->reservePath = new int[2 * n2];
+	this->fPath = new int[2 * n2];
 	this->counter = counter;
 
 	this->cities = new int*[n];
@@ -44,13 +49,13 @@ Traveler::Traveler(int n, int n2, int maxminW, int maxminK, int szuki, int szukj
 			this->cities[i][j] = cities[i][j];
 	}
 		
-	this->cities2 = new int*[n2];
-	for (int i = 0; i < n2; i++)
-	{
-		this->cities2[i] = new int[n2];
-		for (int j = 0; j < n2; j++)
-			this->cities2[i][j] = cities2[i][j];
-	}
+	//this->cities2 = new int*[n2];
+	//for (int i = 0; i < n2; i++)
+	//{
+	//	this->cities2[i] = new int[n2];
+	//	for (int j = 0; j < n2; j++)
+	//		this->cities2[i][j] = cities2[i][j];
+	//}
 
 	this->help = new int[n];
 	for (int i = 0; i < n; i++)
@@ -61,25 +66,30 @@ Traveler::Traveler(int n, int n2, int maxminW, int maxminK, int szuki, int szukj
 		this->help2[i] = help2[i];
 
 	this->path = new int[2 * n2];
-	for (int i = 0; i < 2*n2; i++)
+	for (int i = 0; i < 2 * n2; i++)
+	{
 		this->path[i] = path[i];
+		this->fPath[i] = 0;
+		this->reservePath[i] = 0;
+	}
+
 }
 
 Traveler::~Traveler()
 {
-	for (int i = 0; i < n2; i++)
-		delete[] cities2[i];
+	//for (int i = 0; i < n2; i++)
+	//	delete[] cities2[i];
 
 	for (int i = 0; i < n; i++)
 		delete[] cities[i];
 	
 	delete[] cities;
-	delete[] cities2;
+	//delete[] cities2;
 	delete[] help;
 	delete[] help2;
-	delete[] path;
-	delete[] finalPath;
 	delete[] reservePath;
+	delete[] fPath; //????????????????????????????
+	delete[] path;
 }
 
 void Traveler::LoadFromFile()
@@ -185,7 +195,7 @@ void Traveler::LoadCities()
 			}
 		}
 	}
-	/*cities[1][1] = 999;
+	cities[1][1] = 999;
 	cities[2][1] = 78;
 	cities[3][1] = 5;
 	cities[4][1] = 12;
@@ -209,7 +219,7 @@ void Traveler::LoadCities()
 	cities[2][5] = 3;
 	cities[3][5] = 98;
 	cities[4][5] = 34;
-	cities[5][5] = 999;*/
+	cities[5][5] = 999;
 
 	DisplayCities(cities, n);
 }
@@ -384,10 +394,10 @@ void Traveler::FindMaxMin()
 		{
 			if (help[i] == maxminW)
 			{
-				Traveler *traveler = new Traveler(n, n2, maxminW, maxminK, k, szukj, indi, indj, counter, cities, cities2, help, help2, path, LB);
+				szuki = k;
+				Traveler *traveler = new Traveler(n, n2, maxminW, maxminK, szuki, szukj, indi, indj, counter, cities, help, help2, path, LB);
 				traveler->RecursiveRun();
 				delete traveler;
-				szuki = k;
 			}
 			i++;
 		}
@@ -399,10 +409,10 @@ void Traveler::FindMaxMin()
 		{
 			if (help2[i] == maxminK)
 			{
-				Traveler *traveler = new Traveler(n, n2, maxminW, maxminK, szuki, k, indi, indj, counter, cities, cities2, help, help2, path, LB);
+				szukj = k;
+				Traveler *traveler = new Traveler(n, n2, maxminW, maxminK, szuki, szukj, indi, indj, counter, cities, help, help2, path, LB);
 				traveler->RecursiveRun();
 				delete traveler;
-				szukj = k;
 			}
 			i++;
 		}
@@ -414,10 +424,10 @@ void Traveler::FindMaxMin()
 		{
 			if (help[i] == maxminW)
 			{
-				Traveler *traveler = new Traveler(n, n2, maxminW, maxminK, k, szukj, indi, indj, counter, cities, cities2, help, help2, path, LB);
-				traveler->RecursiveRun();
-				delete traveler;
 				szuki = k;
+				Traveler *traveler = new Traveler(n, n2, maxminW, maxminK, szuki, szukj, indi, indj, counter, cities, help, help2, path, LB);
+				traveler->RecursiveRun();
+				delete traveler;			
 			}
 			i++;
 		}
@@ -426,10 +436,11 @@ void Traveler::FindMaxMin()
 		{
 			if (help2[i] == maxminK)
 			{
-				Traveler *traveler = new Traveler(n, n2, maxminW, maxminK, szuki, k, indi, indj, counter, cities, cities2, help, help2, path, LB);
+				szukj = k;
+				Traveler *traveler = new Traveler(n, n2, maxminW, maxminK, szuki, szukj, indi, indj, counter, cities, help, help2, path, LB);
 				traveler->RecursiveRun();
 				delete traveler;
-				szukj = k;
+				
 			}
 			i++;
 	}
@@ -447,48 +458,70 @@ void Traveler::FindZero()
 	if (maxminK > maxminW)
 	{
 		for (int i = 1; i < n; i++)
+		{
+			cout << "CHUJ1" << endl;
 			if (cities[i][szukj] == 0)
 			{
+				cout << "ifCHUJ1" << endl;
 				indi = i;
-				Traveler *traveler = new Traveler(n, n2, maxminW, maxminK, szuki, szukj, indi, indj, counter, cities, cities2, help, help2, path, LB);
+				Traveler *traveler = new Traveler(n, n2, maxminW, maxminK, szuki, szukj, indi, indj, counter, cities, help, help2, path, LB);
+				cout << "ifrECURSIVECHUJ1" << endl;
 				traveler->RecursiveRunZero();
+				cout << "ifrECURSIVECHUJ1v2" << endl;
 				delete traveler;
-				
+
 			}
+		}
+
 	}
 	else if (maxminK < maxminW)
 	{
 		for (int j = 1; j < n; j++)
+		{
+			cout << "CHUJ2" << endl;
 			if (cities[szuki][j] == 0)
 			{
+				cout << "ifCHUJ2" << endl;
 				indj = j;
-				Traveler *traveler = new Traveler(n, n2, maxminW, maxminK, szuki, szukj, indi, indj, counter, cities, cities2, help, help2, path, LB);
+				Traveler *traveler = new Traveler(n, n2, maxminW, maxminK, szuki, szukj, indi, indj, counter, cities, help, help2, path, LB);
 				traveler->RecursiveRunZero();
 				delete traveler;
-				
+
 			}
+		}
+
 	}
 	else if (maxminW == maxminK)
 	{
 		for (int i = 1; i < n; i++)
+		{
+			cout << "CHUJ3" << endl;
 			if (cities[i][szukj] == 0)
 			{
+				cout << "ifCHUJ3" << endl;
 				indi = i;
-				Traveler *traveler = new Traveler(n, n2, maxminW, maxminK, szuki, szukj, indi, indj, counter, cities, cities2, help, help2, path, LB);
+				Traveler *traveler = new Traveler(n, n2, maxminW, maxminK, szuki, szukj, indi, indj, counter, cities, help, help2, path, LB);
 				traveler->RecursiveRunZero();
 				delete traveler;
-				
+
 			}
+		}
+
 
 
 		for (int j = 1; j < n; j++)
+		{
+			cout << "CHUJ4" << endl;
 			if (cities[szuki][j] == 0)
 			{
+				cout << "ifCHUJ4" << endl;
 				indj = j;
-				Traveler *traveler = new Traveler(n, n2, maxminW, maxminK, szuki, szukj, indi, indj, counter, cities, cities2, help, help2, path, LB);
+				Traveler *traveler = new Traveler(n, n2, maxminW, maxminK, szuki, szukj, indi, indj, counter, cities, help, help2, path, LB);
 				traveler->RecursiveRunZero();
 				delete traveler;
 			}
+		}
+
 	}
 
 	//cout << endl << " zero dla wiekszego z minimow:" << " szuki(wiersze)= " << szuki << " szukj(kolumny)= " << szukj << endl;
@@ -674,21 +707,25 @@ void Traveler::DisplayMin()
 void Traveler::SortPath(int* path)
 {
 	int it = 2;
-	finalPath[0] = path[0];
-	finalPath[1] = path[1];
+	fPath[0] = path[0];
+	fPath[1] = path[1];
 	path[0] = 0;
 	path[1] = 0;
 
-	int buffor = finalPath[1];
+	int buffor = fPath[1];
 	for(int j = 0; j < counter; j++)
 		for (int i = 0; i < counter; i++)
 		{
 			if (buffor == path[i])
 			{
-				finalPath[it++] = path[i];
-				path[i++] = 0;
-				buffor = finalPath[it++] = path[i];
-				path[i++] = 0;
+				fPath[it] = path[i];
+				it++;
+				i++;
+				//path[i++] = 0;
+				buffor = fPath[it] = path[i];
+				it++;
+				i++;
+				//path[i++] = 0;
 				i = counter;
 			}
 		}
@@ -714,14 +751,14 @@ void Traveler::FindLastPath()
 	//DisplayPath(reservePath);
 
 	SortPath(path);
-	//if (finalPath[0] == finalPath[--counter])
-		DisplayPath(finalPath);
+	//if (fPath[0] == fPath[counter-1])
+		DisplayPath(fPath);
 
 	//else 
-	{
+	
 		SortPath(reservePath);
-		DisplayPath(finalPath);
-	}
+		DisplayPath(fPath);
+	
 }
 
 void Traveler::Run()
@@ -745,7 +782,7 @@ void Traveler::RecursiveRun()
 	RemoveRC();
 	Reset();
 
-	for (int i = n - 2; i > 2; i--)
+	for (int i = n - 1; i > 2; i--)
 	{
 		FindMin();
 		FindMin2();
@@ -763,7 +800,7 @@ void Traveler::RecursiveRunZero()
 	RemoveRC();
 	Reset();
 
-	for (int i = n - 2; i > 2; i--)
+	for (int i = n - 1; i > 2; i--)
 	{
 		FindMin();
 		FindMin2();
