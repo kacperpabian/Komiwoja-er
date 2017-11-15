@@ -10,21 +10,17 @@ Traveler::Traveler(int n)
 	counter = 0;
 	cities = new int*[n];
 	for (int i = 0; i < n; i++)
-	{
 		cities[i] = new int[n];
-	}
 }
 
 Traveler::~Traveler()
 {
 	for (int i = 0; i < n2; i++)
-	{
 		delete[] cities2[i];
-	}
+
 	for (int i = 0; i < n; i++)
-	{
 		delete[] cities[i];
-	}
+	
 	delete[] cities;
 	delete[] cities2;
 	delete[] help;
@@ -36,9 +32,8 @@ Traveler::~Traveler()
 
 void Traveler::LoadCities()
 {
-	cout << "LoadCities()" << endl;
-	int m = 0;
-	int j = 0, i = 0;
+	int m = 0, j = 0, i = 0, h = 0;
+
 	for (i = 0; i < n; i++)
 	{
 		cities[i][0] = h;
@@ -62,38 +57,37 @@ void Traveler::LoadCities()
 			}
 		}
 	}
-	//cities[1][1] = 999;
-	//cities[2][1] = 78;
-	//cities[3][1] = 5;
-	//cities[4][1] = 12;
-	//cities[5][1] = 3;
-	//cities[1][2] = 12;
-	//cities[2][2] = 999;
-	//cities[3][2] = 56;
-	//cities[4][2] = 6;
-	//cities[5][2] = 98;
-	//cities[1][3] = 3;
-	//cities[2][3] = 90;
-	//cities[3][3] = 999;
-	//cities[4][3] = 8;
-	//cities[5][3] = 3;
-	//cities[1][4] = 45;
-	//cities[2][4] = 21;
-	//cities[3][4] = 23;
-	//cities[4][4] = 999;
-	//cities[5][4] = 2;
-	//cities[1][5] = 6;
-	//cities[2][5] = 3;
-	//cities[3][5] = 98;
-	//cities[4][5] = 34;
-	//cities[5][5] = 999;
-
+	/*cities[1][1] = 999;
+	cities[2][1] = 78;
+	cities[3][1] = 5;
+	cities[4][1] = 12;
+	cities[5][1] = 3;
+	cities[1][2] = 12;
+	cities[2][2] = 999;
+	cities[3][2] = 56;
+	cities[4][2] = 6;
+	cities[5][2] = 98;
+	cities[1][3] = 3;
+	cities[2][3] = 90;
+	cities[3][3] = 999;
+	cities[4][3] = 8;
+	cities[5][3] = 3;
+	cities[1][4] = 45;
+	cities[2][4] = 21;
+	cities[3][4] = 23;
+	cities[4][4] = 999;
+	cities[5][4] = 2;
+	cities[1][5] = 6;
+	cities[2][5] = 3;
+	cities[3][5] = 98;
+	cities[4][5] = 34;
+	cities[5][5] = 999;
+*/
 	DisplayCities(cities, n);
 }
 
 void Traveler::DisplayCities(int ** cities, int n)
 {
-	cout << "DisplayCities()" << endl;
 	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 	cout << endl << " Macierz miast:";
 	for (int i = 0; i < n; i++)
@@ -118,12 +112,12 @@ void Traveler::DisplayCities(int ** cities, int n)
 
 void Traveler::FindMin()
 {
-	cout << "FindMin()" << endl;
 	int loop = n - 2, i = 0, j = 0;
+	int min = 0;
 	help = new int[n];
 	help2 = new int[n];
 
-	k = 0;
+	int k = 0;
 	for (i = 1; i < n; i++)
 	{
 		min = cities[i][1];
@@ -147,7 +141,7 @@ void Traveler::FindMin()
 		k++;
 	}
 	//*********************************************
-	h = 0;
+	int h = 0;
 	for (j = 1; j < n; j++)
 	{
 		min = cities[1][j];
@@ -176,66 +170,65 @@ void Traveler::FindMin()
 
 void Traveler::FindMin2()
 {
-	cout << "FindMin2()" << endl;
-	int i, j;
-	if (n > 2)
+	int min = 0;
+	int zeroNumber = 0;
+	if (help && help2)
 	{
-		int zeroNumber = 0;
-		if (help && help2)
-		{
-			delete[] help;
-			delete[] help2;
-		}
-		help = new int[n];
-		help2 = new int[n];
-		//szukamy w wierszach
-		k = 0;
-		for (i = 1; i < n; i++)
-		{
-			min = 999;
-			for (j = 1; j < n; j++)
-			{
-				if (cities[i][j] == 0) zeroNumber++;
-				if (zeroNumber >= 2) min = 0;
-				else
-				{
-					if (cities[i][j] <= min && cities[i][j] >0 && cities[i][j] < 900)
-						min = cities[i][j];
-				}
-				help[k] = min;
-			}
-			k++;
-			zeroNumber = 0;
-		}
-		//szukamy w kolumnach
-
-		k = 0;
-		for (j = 1; j < n; j++)
-		{
-			min = 999;
-			for (i = 1; i < n; i++)
-			{
-				if (cities[i][j] == 0) zeroNumber++;
-				if (zeroNumber >= 2) min = 0;
-				else
-				{
-					if (cities[i][j] <= min && cities[i][j] >0 && cities[i][j] < 900)
-						min = cities[i][j];
-				}
-				help2[k] = min;
-			}
-			k++;
-			zeroNumber = 0;
-		}
-		DisplayMin();
+		delete[] help;
+		delete[] help2;
 	}
+	help = new int[n];
+	help2 = new int[n];
+	//szukamy w wierszach
+	int k = 0;
+	for (int i = 1; i < n; i++)
+	{
+		min = 999;
+		for (int j = 1; j < n; j++)
+		{
+			if (cities[i][j] == 0) 
+				zeroNumber++;
+			if (zeroNumber > 1) 
+				min = 0;
+			else
+			{
+				if (cities[i][j] <= min && cities[i][j] > 0 && cities[i][j] < 900)
+					min = cities[i][j];
+			}
+			help[k] = min;
+		}
+		k++;
+		zeroNumber = 0;
+	}
+	//szukamy w kolumnach
+		k = 0;
+	for (int j = 1; j < n; j++)
+	{
+		min = 999;
+		for (int i = 1; i < n; i++)
+		{
+			if (cities[i][j] == 0) 
+				zeroNumber++;
+			if (zeroNumber >= 2)
+				min = 0;
+			else
+			{
+				if (cities[i][j] <= min && cities[i][j] >0 && cities[i][j] < 900)
+					min = cities[i][j];
+			}
+			help2[k] = min;
+		}
+		k++;
+		zeroNumber = 0;
+	}
+	DisplayMin();
 }
+
 void Traveler::FindMaxMin()
 {
-	cout << "FindMaxMin()" << endl;
 	int i = 0;
 	maxminW = help[0];
-	for (k = 1; k < n; k++)
+	for (int k = 1; k < n; k++)
 	{
 		if (help[i] >= maxminW)
 		{
@@ -246,7 +239,7 @@ void Traveler::FindMaxMin()
 	}
 	i = 0;
 	maxminK = help2[0];
-	for (k = 1; k < n; k++)
+	for (int k = 1; k < n; k++)
 	{
 		if (help2[i] >= maxminK)
 		{
@@ -262,7 +255,6 @@ void Traveler::FindMaxMin()
 
 void Traveler::FindZero()
 {
-	cout << "FindZero()" << endl;
 	if (maxminK > maxminW)
 	{
 		for (int i = 1; i < n; i++)
@@ -280,14 +272,14 @@ void Traveler::FindZero()
 			}
 	}
 
-	cout << endl << " wartosc zera: " << max << " dla indexow: i=" << indi << " j=" << indj << endl;
-	cout << " szuki: " << szuki << " szukj: " << szukj << endl;
+	cout << endl << " zero dla wiekszego z minimow:" << " szuki(wiersze)= " << szuki << " szukj(kolumny)= " << szukj << endl;
+	cout << " jest w: (kolumny)i=" << indi << " (wiersze)j=" << indj << endl;
+	
 }
 
 void Traveler::FindInd()
 {
-	cout << "FindInd()" << endl;
-	max = 0;
+	int max = 0;
 	if (maxminK < maxminW)
 	{
 		max = maxminW;
@@ -296,6 +288,7 @@ void Traveler::FindInd()
 	{
 		max = maxminK;
 	}
+
 	if (max == maxminW)
 	{
 		for (int j = 1; j < n; j++)
@@ -306,7 +299,6 @@ void Traveler::FindInd()
 			}
 	}
 	else
-		if (max == maxminK)
 		{
 			for (int i = 1; i < n; i++)
 				if (cities[i][szukj] == max)
@@ -320,24 +312,16 @@ void Traveler::FindInd()
 
 void Traveler::InitCities2()
 {
-	cout << "InitCities2()" << endl;
 	cities2 = new int*[n];
 	for (int i = 0; i < n; i++)
-	{
 		cities2[i] = new int[n];
-	}
 
 	for (int i = 0; i < n; i++)
-	{
 		for (int j = 0; j < n; j++)
-		{
 			cities2[i][j] = cities[i][j];
-		}
-	}
 }
 void Traveler::RemoveRC()
 {
-	cout << "RemoveRC()" << endl;
 	if (maxminK > maxminW)
 	{
 		cout << " k " << cities[indi][0] << "/" << cities[0][szukj] << endl;
@@ -346,18 +330,11 @@ void Traveler::RemoveRC()
 
 		
 		for (int i = 0; i < n; i++)
-		{
 			for (int j = 0; j < n; j++)
 			{
 				if (cities[0][szukj] == cities[i][0] && cities[indi][0] == cities[0][j])
-				{
 					cities[i][j] = 999;
-				}
-			}
-		}
-
-		//cities2[szukj][indi] = 999;
-		//cities2[szuki][szukj] = 999;
+			}			
 	}
 	else
 	{
@@ -365,27 +342,17 @@ void Traveler::RemoveRC()
 		path[counter++] = cities[szuki][0];
 		path[counter++] = cities[0][indj];
 		for (int i = 0; i < n; i++)
-		{
 			for (int j = 0; j < n; j++)
 			{
 				if (cities[0][indj] == cities[i][0] && cities[szuki][0] == cities[0][j])
-				{
 					cities[i][j] = 999;
-				}
 			}
-		}
-
-		//cities2[indj][szuki] = 999;
-		//cities2[szuki][szukj] = 999;
 	}
 	
-
 	n = n - 1;
 	cities3 = new int*[n];
 	for (int i = 0; i < n; i++)
-	{
 		cities3[i] = new int[n];
-	}
 
 	int p = 0;
 	int o = 0;
@@ -430,41 +397,41 @@ void Traveler::RemoveRC()
 		}
 	}
 	for (int i = 0; i < n; i++)
-	{
 		delete[] cities[i];
-	}
+
 	delete[] cities;
 
 	cities = cities3;
 	DisplayCities(cities, n);
-	//DisplayCities(cities2, n2);
 }
 
 void Traveler::DisplayPath(int* path)
 {
 	cout << endl << " Wyswietlam sciezke: " << endl;
 	for (int i = 0; i < counter; i++)
-	{
 		cout << " (" << path[i++] << " " << path[i] << ") ";
-	}
+
 	cout << endl;
 }
 
 void Traveler::DisplayMin()
 {
-	cout << "DisplayMin()" << endl;
 	cout << endl << endl;
 	cout << " Najmniejsze elementy z wierszy:";
-	for (h = 0; h < n - 1; h++)
+	for (int h = 0; h < n - 1; h++)
 	{
-		cout.width(3); cout << help[h];
+		cout.width(3); 
+		cout << help[h];
 	}
+
 	cout << endl << endl;
 	cout << " Najmniejsze elementy z kolumn:";
-	for (h = 0; h < n - 1; h++)
+	for (int h = 0; h < n - 1; h++)
 	{
-		cout.width(3);  cout << help2[h];
+		cout.width(3);
+		cout << help2[h];
 	}
+
 	cout << endl;
 }
 
@@ -477,8 +444,7 @@ void Traveler::SortPath(int* path)
 	path[1] = 0;
 
 	int buffor = finalPath[1];
-	for(int j = 0; j < counter / 2; j++)
-	{
+	for(int j = 0; j < counter; j++)
 		for (int i = 0; i < counter; i++)
 		{
 			if (buffor == path[i])
@@ -490,15 +456,13 @@ void Traveler::SortPath(int* path)
 				i = counter;
 			}
 		}
-	}
 }
 
 void Traveler::FindLastPath()
 {
 	for (int i = 0; i < counter; i++)
-	{
 		reservePath[i] = path[i];
-	}
+
 	path[counter++] = cities[2][0];
 	path[counter++] = cities[0][1];
 	path[counter++] = cities[1][0];
@@ -533,8 +497,6 @@ void Traveler::SumLowerBound()
 
 void Traveler::Reset() 
 {
-	cout << "Reset()" << endl;
-	max = 0;
 	maxminW = 0;
 	maxminK = 0;
 	szuki = 1;

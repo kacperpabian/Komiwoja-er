@@ -9,10 +9,16 @@ using namespace std;
 class Traveler
 {
 public:
-	int n, n2, min, k = 0, sum = 0, h = 0;
-	int max = 0, maxminW = 0, maxminK = 0,
-		szuki = 1, szukj = 1;
-	int indi = 0, indj = 0;
+	int n, n2;
+	int maxminW = 0, maxminK = 0; // maksymalne minima
+
+		// póki co nie sysematyzowane, jeœli >1 to wybrany ostatni(?)
+	int	szuki = 1, // [+1] - index w help - najwiêkszy z minimów w wierszach
+		szukj = 1; // [+1] - index w help2 - najwiêkszy z minimów w kolumnach
+
+	int indi = 0, // indeks zera (wiersz) jesli maxmin w kolumnach, inaczej 0
+		indj = 0; // indeks zera (kolumna) jesli maxmin w wierszy, inaczej 0
+
 	int **cities, **cities2, **cities3, *help, *help2;
 	int LB;
 	int *path, counter, *finalPath, *reservePath;
