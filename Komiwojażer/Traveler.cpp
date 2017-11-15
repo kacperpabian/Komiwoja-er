@@ -553,12 +553,27 @@ void Traveler::RemoveRC()
 
 void Traveler::DisplayPath(int* path)
 {
+	bool ifMore = false;
 	if (path[0] == path[counter-1])
 	{
-		cout << endl << " Wyswietlam sciezke: " << endl;
-		for (int i = 0; i < counter; i++)
-			cout << " (" << path[i++] << " " << path[i] << ") ";
-		cout << endl;
+		int k = 0;
+		for (int i = 1; i < counter+1; i++)
+		{
+			for (int j = 0; j < counter; j++)
+			{
+				if (path[j] == i) k++;
+				if (k > 2) ifMore = true;
+			}
+			k = 0;
+
+		}
+		if (!ifMore)
+		{
+			cout << endl << " Wyswietlam sciezke: " << endl;
+			for (int i = 0; i < counter; i++)
+				cout << " (" << path[i++] << " " << path[i] << ") ";
+			cout << endl;
+		}
 	}
 }
 
@@ -653,7 +668,6 @@ void Traveler::Run()
 
 void Traveler::RecursiveRun()
 {
-	//cout << endl << " RecRun" << endl;
 	FindZero();
 	RemoveRC();
 	Reset();
