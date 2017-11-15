@@ -19,7 +19,7 @@ Traveler::Traveler(int n)
 		cities[i] = new int[n];
 
 	path = new int[2 * n2];
-	for (int i = 0; i < n; i++)
+	for (int i = 0; i < 2*n2; i++)
 		path[i] = 0;
 }
 
@@ -64,7 +64,7 @@ Traveler::Traveler(int n, int n2, int maxminW, int maxminK, int szuki, int szukj
 		this->help2[i] = help2[i];
 
 	this->path = new int[2 * n2];
-	for (int i = 0; i < n; i++)
+	for (int i = 0; i < 2*n2; i++)
 		this->path[i] = path[i];
 }
 
@@ -324,13 +324,13 @@ void Traveler::FindMaxMin()
 		{
 			if (help2[i] == maxminK)
 			{
-				Traveler *traveler = new Traveler(n, n2, maxminW, maxminK, k, szukj, indi, indj, counter, cities, cities2, help, help2, path, LB);
+				Traveler *traveler = new Traveler(n, n2, maxminW, maxminK, szuki, k, indi, indj, counter, cities, cities2, help, help2, path, LB);
 				traveler->RecursiveRun();
 			}
 			i++;
 		}
 	}
-	else
+	else if (maxminW == maxminK)
 	{
 		i = 0;
 		for (int k = 1; k < n; k++)
@@ -347,7 +347,7 @@ void Traveler::FindMaxMin()
 		{
 			if (help2[i] == maxminK)
 			{
-				Traveler *traveler = new Traveler(n, n2, maxminW, maxminK, k, szukj, indi, indj, counter, cities, cities2, help, help2, path, LB);
+				Traveler *traveler = new Traveler(n, n2, maxminW, maxminK, szuki, k, indi, indj, counter, cities, cities2, help, help2, path, LB);
 				traveler->RecursiveRun();
 			}
 			i++;
@@ -588,9 +588,10 @@ void Traveler::FindLastPath()
 	//DisplayPath(reservePath);
 
 	SortPath(path);
-	//if (finalPath[0] == finalPath[counter - 1])
+	if (finalPath[0] == finalPath[counter - 1])
 		DisplayPath(finalPath);
-	//else 
+
+	else 
 	{
 		SortPath(reservePath);
 		DisplayPath(finalPath);
