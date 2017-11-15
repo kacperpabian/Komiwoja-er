@@ -10,14 +10,14 @@ int main()
 	cout << "/******Komiwojazer dla n miast********" << endl;
 	cout << "Podaj ilosc miast:" << endl;
 	cin >> n;
-	Traveler traveler(++n);
+	Traveler *traveler = new Traveler (++n);
 
-	traveler.LoadCities();
-	traveler.InitCities2();
-	traveler.Run();
+	traveler->LoadCities();
+	traveler->InitCities2();
+	traveler->Run();
 
-	traveler.End();
-	traveler.FindLastPath();
+	traveler->End();
 	//traveler.DisplayPath();
+	delete traveler;
 	getchar();
 }

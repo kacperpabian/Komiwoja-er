@@ -33,8 +33,8 @@ Traveler::Traveler(int n, int n2, int maxminW, int maxminK, int szuki, int szukj
 	this->LB = LB;
 	reservePath = new int[2 * n2];
 	finalPath = new int[2 * n2];
-	path = new int[2 * n2];
-	counter = 0;
+	this->path = new int[2 * n2];
+	this->counter = 0;
 
 	this->cities = new int*[n];
 	for (int i = 0; i < n; i++)
@@ -106,31 +106,31 @@ void Traveler::LoadCities()
 			}
 		}
 	}
-	cities[1][1] = 999;
-	cities[2][1] = 78;
-	cities[3][1] = 5;
-	cities[4][1] = 12;
-	cities[5][1] = 3;
-	cities[1][2] = 12;
-	cities[2][2] = 999;
-	cities[3][2] = 56;
-	cities[4][2] = 6;
-	cities[5][2] = 98;
-	cities[1][3] = 3;
-	cities[2][3] = 90;
-	cities[3][3] = 999;
-	cities[4][3] = 8;
-	cities[5][3] = 3;
-	cities[1][4] = 45;
-	cities[2][4] = 21;
-	cities[3][4] = 23;
-	cities[4][4] = 999;
-	cities[5][4] = 2;
-	cities[1][5] = 6;
-	cities[2][5] = 3;
-	cities[3][5] = 98;
-	cities[4][5] = 34;
-	cities[5][5] = 999;
+	//cities[1][1] = 999;
+	//cities[2][1] = 78;
+	//cities[3][1] = 5;
+	//cities[4][1] = 12;
+	//cities[5][1] = 3;
+	//cities[1][2] = 12;
+	//cities[2][2] = 999;
+	//cities[3][2] = 56;
+	//cities[4][2] = 6;
+	//cities[5][2] = 98;
+	//cities[1][3] = 3;
+	//cities[2][3] = 90;
+	//cities[3][3] = 999;
+	//cities[4][3] = 8;
+	//cities[5][3] = 3;
+	//cities[1][4] = 45;
+	//cities[2][4] = 21;
+	//cities[3][4] = 23;
+	//cities[4][4] = 999;
+	//cities[5][4] = 2;
+	//cities[1][5] = 6;
+	//cities[2][5] = 3;
+	//cities[3][5] = 98;
+	//cities[4][5] = 34;
+	//cities[5][5] = 999;
 
 	DisplayCities(cities, n);
 }
@@ -324,7 +324,23 @@ void Traveler::FindMaxMin()
 	}
 	else
 	{
+		for (int k = 1; k < n; k++)
+		{
+			if (help[i] == maxminW)
+			{
+				RecursiveRun(k, szukj);
+			}
+			i++;
+		}
 		i = 0;
+		for (int k = 0; k < n; k++)
+		{
+			if (help2[i] == maxminK)
+			{
+				RecursiveRun(szuki, k);
+			}
+			i++;
+	}
 		//go1
 		//go2
 	}
@@ -571,8 +587,10 @@ void Traveler::FindLastPath()
 
 void Traveler::Run()
 {
+	
 	for (int i = n - 1; i > 2; i--)
 	{
+		cout << endl << " Run" << endl;
 		FindMin();
 		FindMin2();
 		FindMaxMin();
@@ -580,25 +598,28 @@ void Traveler::Run()
 		RemoveRC();
 		Reset();
 	}
+	FindLastPath();
 }
 
 void Traveler::RecursiveRun(int szuki, int szukj)
 {
-	Traveler traveler(n, n2, maxminW, maxminK, szuki, szukj, indi, indj, cities, cities2, help, help, LB);
+	cout << endl << " RecRun" << endl;
+	Traveler *traveler = new Traveler(n, n2, maxminW, maxminK, szuki, szukj, indi, indj, cities, cities2, help, help, LB);
 
-	traveler.FindZero();
-	traveler.RemoveRC();
-	traveler.Reset();
+	traveler->FindZero();
+	traveler->RemoveRC();
+	traveler->Reset();
 
-	for (int i = n - 1; i > 2; i--)
+	for (int i = n - 2; i > 2; i--)
 	{
-		traveler.FindMin();
-		traveler.FindMin2();
-		traveler.FindMaxMin();
-		traveler.FindZero();
-		traveler.RemoveRC();
-		traveler.Reset();
+		traveler->FindMin();
+		traveler->FindMin2();
+		traveler->FindMaxMin();
+		traveler->FindZero();
+		traveler->RemoveRC();
+		traveler->Reset();
 	}
+	traveler->FindLastPath();
 }
 
 void Traveler::SumLowerBound()
