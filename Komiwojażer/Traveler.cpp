@@ -313,6 +313,7 @@ void Traveler::FindMaxMin()
 			{
 				Traveler *traveler = new Traveler(n, n2, maxminW, maxminK, k, szukj, indi, indj, counter, cities, cities2, help, help2, path, LB);
 				traveler->RecursiveRun();
+				delete traveler;
 			}
 			i++;
 		}
@@ -326,6 +327,7 @@ void Traveler::FindMaxMin()
 			{
 				Traveler *traveler = new Traveler(n, n2, maxminW, maxminK, szuki, k, indi, indj, counter, cities, cities2, help, help2, path, LB);
 				traveler->RecursiveRun();
+				delete traveler;
 			}
 			i++;
 		}
@@ -339,6 +341,7 @@ void Traveler::FindMaxMin()
 			{
 				Traveler *traveler = new Traveler(n, n2, maxminW, maxminK, k, szukj, indi, indj, counter, cities, cities2, help, help2, path, LB);
 				traveler->RecursiveRun();
+				delete traveler;
 			}
 			i++;
 		}
@@ -349,6 +352,7 @@ void Traveler::FindMaxMin()
 			{
 				Traveler *traveler = new Traveler(n, n2, maxminW, maxminK, szuki, k, indi, indj, counter, cities, cities2, help, help2, path, LB);
 				traveler->RecursiveRun();
+				delete traveler;
 			}
 			i++;
 	}
@@ -371,6 +375,7 @@ void Traveler::FindZero()
 				indi = i;
 				Traveler *traveler = new Traveler(n, n2, maxminW, maxminK, szuki, szukj, indi, indj, counter, cities, cities2, help, help2, path, LB);
 				traveler->RecursiveRunZero();
+				delete traveler;
 				
 			}
 	}
@@ -382,6 +387,7 @@ void Traveler::FindZero()
 				indj = j;
 				Traveler *traveler = new Traveler(n, n2, maxminW, maxminK, szuki, szukj, indi, indj, counter, cities, cities2, help, help2, path, LB);
 				traveler->RecursiveRunZero();
+				delete traveler;
 				
 			}
 	}
@@ -393,6 +399,7 @@ void Traveler::FindZero()
 				indi = i;
 				Traveler *traveler = new Traveler(n, n2, maxminW, maxminK, szuki, szukj, indi, indj, counter, cities, cities2, help, help2, path, LB);
 				traveler->RecursiveRunZero();
+				delete traveler;
 				
 			}
 
@@ -403,6 +410,7 @@ void Traveler::FindZero()
 				indj = j;
 				Traveler *traveler = new Traveler(n, n2, maxminW, maxminK, szuki, szukj, indi, indj, counter, cities, cities2, help, help2, path, LB);
 				traveler->RecursiveRunZero();
+				delete traveler;
 			}
 	}
 
