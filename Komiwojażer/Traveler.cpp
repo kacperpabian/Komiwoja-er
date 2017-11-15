@@ -34,7 +34,7 @@ Traveler::Traveler(int n, int n2, int maxminW, int maxminK, int szuki, int szukj
 	reservePath = new int[2 * n2];
 	finalPath = new int[2 * n2];
 	this->path = new int[2 * n2];
-	this->counter = 0;
+	this->counter = counter;
 
 	this->cities = new int*[n];
 	for (int i = 0; i < n; i++)
@@ -571,6 +571,7 @@ void Traveler::FindLastPath()
 	reservePath[counter++] = cities[0][1];
 	reservePath[counter++] = cities[2][0];
 	reservePath[counter++] = cities[0][2];
+
 
 	//DisplayPath(path);
 	//DisplayPath(reservePath);
