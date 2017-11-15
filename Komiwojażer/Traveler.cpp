@@ -311,7 +311,8 @@ void Traveler::FindMaxMin()
 		{
 			if (help[i] == maxminW)
 			{
-				RecursiveRun(k, szukj);
+				Traveler *traveler = new Traveler(n, n2, maxminW, maxminK, k, szukj, indi, indj, counter, cities, cities2, help, help2, path, LB);
+				traveler->RecursiveRun();
 			}
 			i++;
 		}
@@ -323,7 +324,8 @@ void Traveler::FindMaxMin()
 		{
 			if (help2[i] == maxminK)
 			{
-				RecursiveRun(szuki, k);
+				Traveler *traveler = new Traveler(n, n2, maxminW, maxminK, k, szukj, indi, indj, counter, cities, cities2, help, help2, path, LB);
+				traveler->RecursiveRun();
 			}
 			i++;
 		}
@@ -335,7 +337,8 @@ void Traveler::FindMaxMin()
 		{
 			if (help[i] == maxminW)
 			{
-				RecursiveRun(k, szukj);
+				Traveler *traveler = new Traveler(n, n2, maxminW, maxminK, k, szukj, indi, indj, counter, cities, cities2, help, help2, path, LB);
+				traveler->RecursiveRun();
 			}
 			i++;
 		}
@@ -344,7 +347,8 @@ void Traveler::FindMaxMin()
 		{
 			if (help2[i] == maxminK)
 			{
-				RecursiveRun(szuki, k);
+				Traveler *traveler = new Traveler(n, n2, maxminW, maxminK, k, szukj, indi, indj, counter, cities, cities2, help, help2, path, LB);
+				traveler->RecursiveRun();
 			}
 			i++;
 	}
@@ -595,7 +599,6 @@ void Traveler::FindLastPath()
 
 void Traveler::Run()
 {
-	
 	for (int i = n - 1; i > 2; i--)
 	{
 		//cout << endl << " Run" << endl;
@@ -609,25 +612,23 @@ void Traveler::Run()
 	FindLastPath();
 }
 
-void Traveler::RecursiveRun(int szuki, int szukj)
+void Traveler::RecursiveRun()
 {
 	//cout << endl << " RecRun" << endl;
-	Traveler *traveler = new Traveler(n, n2, maxminW, maxminK, szuki, szukj, indi, indj, counter, cities, cities2, help, help2, path, LB);
-
-	traveler->FindZero();
-	traveler->RemoveRC();
-	traveler->Reset();
+	FindZero();
+	RemoveRC();
+	Reset();
 
 	for (int i = n - 2; i > 2; i--)
 	{
-		traveler->FindMin();
-		traveler->FindMin2();
-		traveler->FindMaxMin();
-		traveler->FindZero();
-		traveler->RemoveRC();
-		traveler->Reset();
+		FindMin();
+		FindMin2();
+		FindMaxMin();
+		FindZero();
+		RemoveRC();
+		Reset();
 	}
-	traveler->FindLastPath();
+	FindLastPath();
 }
 
 void Traveler::SumLowerBound()

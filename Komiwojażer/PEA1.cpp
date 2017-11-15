@@ -20,4 +20,5 @@ int main()
 	//traveler.DisplayPath();
 	delete traveler;
 	getchar();
+	getchar();
 }
