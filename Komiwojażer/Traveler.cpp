@@ -12,15 +12,19 @@ Traveler::Traveler(int n)
 	n2 = n;
 	reservePath = new int[2 * n2];
 	finalPath = new int[2 * n2];
-	path = new int[2 * n2];
+	
 	counter = 0;
 	cities = new int*[n];
 	for (int i = 0; i < n; i++)
 		cities[i] = new int[n];
+
+	path = new int[2 * n2];
+	for (int i = 0; i < n; i++)
+		path[i] = 0;
 }
 
-Traveler::Traveler(int n, int n2, int maxminW, int maxminK, int szuki, int szukj, int indi, int indj,
-	int **cities, int **cities2, int *help, int *help2, int LB)
+Traveler::Traveler(int n, int n2, int maxminW, int maxminK, int szuki, int szukj, int indi, int indj, int counter,
+	int **cities, int **cities2, int *help, int *help2, int * path, int LB)
 {
 	this->maxminW = maxminW;
 	this->maxminK = maxminK;
@@ -33,7 +37,6 @@ Traveler::Traveler(int n, int n2, int maxminW, int maxminK, int szuki, int szukj
 	this->LB = LB;
 	reservePath = new int[2 * n2];
 	finalPath = new int[2 * n2];
-	this->path = new int[2 * n2];
 	this->counter = counter;
 
 	this->cities = new int*[n];
@@ -60,6 +63,9 @@ Traveler::Traveler(int n, int n2, int maxminW, int maxminK, int szuki, int szukj
 	for (int i = 0; i < n; i++)
 		this->help2[i] = help2[i];
 
+	this->path = new int[2 * n2];
+	for (int i = 0; i < n; i++)
+		this->path[i] = path[i];
 }
 
 Traveler::~Traveler()
@@ -161,7 +167,7 @@ void Traveler::DisplayCities(int ** cities, int n)
 
 void Traveler::FindMin()
 {
-	int loop = n - 2, i = 0, j = 0;
+	int i = 0, j = 0;
 	int min = 0;
 	help = new int[n];
 	help2 = new int[n];
@@ -506,11 +512,13 @@ void Traveler::RemoveRC()
 
 void Traveler::DisplayPath(int* path)
 {
-	cout << endl << " Wyswietlam sciezke: " << endl;
-	for (int i = 0; i < counter; i++)
-		cout << " (" << path[i++] << " " << path[i] << ") ";
-
-	cout << endl;
+	if (path[0] == path[counter - 1])
+	{
+		cout << endl << " Wyswietlam sciezke: " << endl;
+		for (int i = 0; i < counter; i++)
+			cout << " (" << path[i++] << " " << path[i] << ") ";
+		cout << endl;
+	}
 }
 
 void Traveler::DisplayMin()
@@ -591,7 +599,7 @@ void Traveler::Run()
 	
 	for (int i = n - 1; i > 2; i--)
 	{
-		cout << endl << " Run" << endl;
+		//cout << endl << " Run" << endl;
 		FindMin();
 		FindMin2();
 		FindMaxMin();
@@ -604,8 +612,8 @@ void Traveler::Run()
 
 void Traveler::RecursiveRun(int szuki, int szukj)
 {
-	cout << endl << " RecRun" << endl;
-	Traveler *traveler = new Traveler(n, n2, maxminW, maxminK, szuki, szukj, indi, indj, cities, cities2, help, help, LB);
+	//cout << endl << " RecRun" << endl;
+	Traveler *traveler = new Traveler(n, n2, maxminW, maxminK, szuki, szukj, indi, indj, counter, cities, cities2, help, help2, path, LB);
 
 	traveler->FindZero();
 	traveler->RemoveRC();

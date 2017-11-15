@@ -42,6 +42,6 @@ public:
 	void Run();
 	void RecursiveRun(int szuki, int szukj);
 	Traveler(int n);
-	Traveler(int n, int n2, int maxminW, int maxminK, int szuki, int szukj, int indi, int indj, int ** cities, int ** cities2, int * help, int * help2, int LB);
+	Traveler(int n, int n2, int maxminW, int maxminK, int szuki, int szukj, int indi, int indj, int counter, int ** cities, int ** cities2, int * help, int * help2, int * path, int LB);
 	~Traveler();
 };
