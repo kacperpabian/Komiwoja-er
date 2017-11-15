@@ -112,31 +112,31 @@ void Traveler::LoadCities()
 			}
 		}
 	}
-	//cities[1][1] = 999;
-	//cities[2][1] = 78;
-	//cities[3][1] = 5;
-	//cities[4][1] = 12;
-	//cities[5][1] = 3;
-	//cities[1][2] = 12;
-	//cities[2][2] = 999;
-	//cities[3][2] = 56;
-	//cities[4][2] = 6;
-	//cities[5][2] = 98;
-	//cities[1][3] = 3;
-	//cities[2][3] = 90;
-	//cities[3][3] = 999;
-	//cities[4][3] = 8;
-	//cities[5][3] = 3;
-	//cities[1][4] = 45;
-	//cities[2][4] = 21;
-	//cities[3][4] = 23;
-	//cities[4][4] = 999;
-	//cities[5][4] = 2;
-	//cities[1][5] = 6;
-	//cities[2][5] = 3;
-	//cities[3][5] = 98;
-	//cities[4][5] = 34;
-	//cities[5][5] = 999;
+	cities[1][1] = 999;
+	cities[2][1] = 78;
+	cities[3][1] = 5;
+	cities[4][1] = 12;
+	cities[5][1] = 3;
+	cities[1][2] = 12;
+	cities[2][2] = 999;
+	cities[3][2] = 56;
+	cities[4][2] = 6;
+	cities[5][2] = 98;
+	cities[1][3] = 3;
+	cities[2][3] = 90;
+	cities[3][3] = 999;
+	cities[4][3] = 8;
+	cities[5][3] = 3;
+	cities[1][4] = 45;
+	cities[2][4] = 21;
+	cities[3][4] = 23;
+	cities[4][4] = 999;
+	cities[5][4] = 2;
+	cities[1][5] = 6;
+	cities[2][5] = 3;
+	cities[3][5] = 98;
+	cities[4][5] = 34;
+	cities[5][5] = 999;
 
 	DisplayCities(cities, n);
 }
@@ -369,14 +369,40 @@ void Traveler::FindZero()
 			if (cities[i][szukj] == 0)
 			{
 				indi = i;
+				Traveler *traveler = new Traveler(n, n2, maxminW, maxminK, szuki, szukj, indi, indj, counter, cities, cities2, help, help2, path, LB);
+				traveler->RecursiveRunZero();
+				
 			}
 	}
-	else
+	else if (maxminK < maxminW)
 	{
 		for (int j = 1; j < n; j++)
 			if (cities[szuki][j] == 0)
 			{
 				indj = j;
+				Traveler *traveler = new Traveler(n, n2, maxminW, maxminK, szuki, szukj, indi, indj, counter, cities, cities2, help, help2, path, LB);
+				traveler->RecursiveRunZero();
+				
+			}
+	}
+	else
+	{
+		for (int i = 1; i < n; i++)
+			if (cities[i][szukj] == 0)
+			{
+				indi = i;
+				Traveler *traveler = new Traveler(n, n2, maxminW, maxminK, szuki, szukj, indi, indj, counter, cities, cities2, help, help2, path, LB);
+				traveler->RecursiveRunZero();
+				
+			}
+
+
+		for (int j = 1; j < n; j++)
+			if (cities[szuki][j] == 0)
+			{
+				indj = j;
+				Traveler *traveler = new Traveler(n, n2, maxminW, maxminK, szuki, szukj, indi, indj, counter, cities, cities2, help, help2, path, LB);
+				traveler->RecursiveRunZero();
 			}
 	}
 
@@ -515,7 +541,7 @@ void Traveler::RemoveRC()
 
 void Traveler::DisplayPath(int* path)
 {
-	if (path[0] == path[counter - 1])
+	if (path[0] == path[counter-1])
 	{
 		cout << endl << " Wyswietlam sciezke: " << endl;
 		for (int i = 0; i < counter; i++)
@@ -588,10 +614,10 @@ void Traveler::FindLastPath()
 	//DisplayPath(reservePath);
 
 	SortPath(path);
-	if (finalPath[0] == finalPath[counter - 1])
+	//if (finalPath[0] == finalPath[--counter])
 		DisplayPath(finalPath);
 
-	else 
+	//else 
 	{
 		SortPath(reservePath);
 		DisplayPath(finalPath);
@@ -617,6 +643,24 @@ void Traveler::RecursiveRun()
 {
 	//cout << endl << " RecRun" << endl;
 	FindZero();
+	RemoveRC();
+	Reset();
+
+	for (int i = n - 2; i > 2; i--)
+	{
+		FindMin();
+		FindMin2();
+		FindMaxMin();
+		FindZero();
+		RemoveRC();
+		Reset();
+	}
+	FindLastPath();
+}
+
+void Traveler::RecursiveRunZero()
+{
+	//cout << endl << " RecRun" << endl;
 	RemoveRC();
 	Reset();
 
