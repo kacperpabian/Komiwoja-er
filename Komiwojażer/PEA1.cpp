@@ -13,24 +13,9 @@ int main()
 	Traveler traveler(++n);
 
 	traveler.LoadCities();
-	traveler.FindMin();
-	traveler.SumLowerBound();
-	traveler.FindMin2();
-	traveler.FindMaxMin();
-	traveler.FindZero();
 	traveler.InitCities2();
-	traveler.RemoveRC();
+	traveler.Run();
 
-	for (int i = n - 2; i > 2; i--)
-	{
-		cout << "kek" << i << endl;
-		traveler.Reset();
-		traveler.FindMin();
-		traveler.FindMin2();
-		traveler.FindMaxMin();
-		traveler.FindZero();
-		traveler.RemoveRC();
-	}
 	traveler.End();
 	traveler.FindLastPath();
 	//traveler.DisplayPath();

@@ -106,7 +106,7 @@ void Traveler::LoadCities()
 			}
 		}
 	}
-	/*cities[1][1] = 999;
+	cities[1][1] = 999;
 	cities[2][1] = 78;
 	cities[3][1] = 5;
 	cities[4][1] = 12;
@@ -131,7 +131,7 @@ void Traveler::LoadCities()
 	cities[3][5] = 98;
 	cities[4][5] = 34;
 	cities[5][5] = 999;
-*/
+
 	DisplayCities(cities, n);
 }
 
@@ -298,6 +298,38 @@ void Traveler::FindMaxMin()
 		i++;
 	}
 
+	if (maxminW > maxminK)
+	{
+		i = 0;
+		for (int k = 1; k < n; k++)
+		{
+			if (help[i] == maxminW)
+			{
+				RecursiveRun(k, szukj);
+			}
+			i++;
+		}
+	}
+	else if (maxminW < maxminK)
+	{
+		i = 0;
+		for (int k = 0; k < n; k++)
+		{
+			if (help2[i] == maxminK)
+			{
+				RecursiveRun(szuki, k);
+			}
+			i++;
+		}
+	}
+	else
+	{
+		i = 0;
+		//go1
+		//go2
+	}
+	
+
 	//cout << endl << " Najwieksze min z W: " << maxminW << endl;
 	//cout << endl << " Najwieksze min z K: " << maxminK << endl;
 }
@@ -373,7 +405,7 @@ void Traveler::RemoveRC()
 {
 	if (maxminK > maxminW)
 	{
-		cout << " k " << cities[indi][0] << "/" << cities[0][szukj] << endl;
+		//cout << " k " << cities[indi][0] << "/" << cities[0][szukj] << endl;
 		path[counter++] = cities[indi][0];
 		path[counter++] = cities[0][szukj];
 
@@ -387,7 +419,7 @@ void Traveler::RemoveRC()
 	}
 	else
 	{
-		cout << " w " << cities[szuki][0] << "/" << cities[0][indj] << endl;
+		//cout << " w " << cities[szuki][0] << "/" << cities[0][indj] << endl;
 		path[counter++] = cities[szuki][0];
 		path[counter++] = cities[0][indj];
 		for (int i = 0; i < n; i++)
@@ -537,6 +569,38 @@ void Traveler::FindLastPath()
 	}
 }
 
+void Traveler::Run()
+{
+	for (int i = n - 1; i > 2; i--)
+	{
+		FindMin();
+		FindMin2();
+		FindMaxMin();
+		FindZero();
+		RemoveRC();
+		Reset();
+	}
+}
+
+void Traveler::RecursiveRun(int szuki, int szukj)
+{
+	Traveler traveler(n, n2, maxminW, maxminK, szuki, szukj, indi, indj, cities, cities2, help, help, LB);
+
+	traveler.FindZero();
+	traveler.RemoveRC();
+	traveler.Reset();
+
+	for (int i = n - 1; i > 2; i--)
+	{
+		traveler.FindMin();
+		traveler.FindMin2();
+		traveler.FindMaxMin();
+		traveler.FindZero();
+		traveler.RemoveRC();
+		traveler.Reset();
+	}
+}
+
 void Traveler::SumLowerBound()
 {
 	for (int i = 0; i < n - 1; i++)
@@ -559,5 +623,5 @@ void Traveler::Reset()
 void Traveler::End()
 {
 	cout << "End()" << endl;
-	DisplayCities(cities2, n2);
+	//DisplayCities(cities2, n2);
 }
