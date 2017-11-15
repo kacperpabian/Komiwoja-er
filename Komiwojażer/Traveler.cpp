@@ -319,7 +319,7 @@ void Traveler::FindMaxMin()
 	else if (maxminW < maxminK)
 	{
 		i = 0;
-		for (int k = 0; k < n; k++)
+		for (int k = 1; k < n; k++)
 		{
 			if (help2[i] == maxminK)
 			{
@@ -330,6 +330,7 @@ void Traveler::FindMaxMin()
 	}
 	else
 	{
+		i = 0;
 		for (int k = 1; k < n; k++)
 		{
 			if (help[i] == maxminW)
@@ -339,7 +340,7 @@ void Traveler::FindMaxMin()
 			i++;
 		}
 		i = 0;
-		for (int k = 0; k < n; k++)
+		for (int k = 1; k < n; k++)
 		{
 			if (help2[i] == maxminK)
 			{
@@ -454,8 +455,8 @@ void Traveler::RemoveRC()
 	
 	n = n - 1;
 	cities3 = new int*[n];
-	/*for (int i = 0; i < n; i++)
-		cities3[i] = new int[n];*/
+	for (int i = 0; i < n; i++)
+		cities3[i] = new int[n];
 
 	int p = 0;
 	int o = 0;
@@ -463,7 +464,6 @@ void Traveler::RemoveRC()
 	{
 		for (int i = 0; i < n; i++)
 		{
-			cities3[i] = new int[n];
 			if (i == indi)
 				p++;
 
@@ -484,7 +484,6 @@ void Traveler::RemoveRC()
 	{
 		for (int i = 0; i < n; i++)
 		{
-			cities3[i] = new int[n];
 			if (i == szuki)
 				p++;
 
